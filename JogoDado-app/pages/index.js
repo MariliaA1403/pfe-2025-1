@@ -4,24 +4,24 @@ export default function Home() {
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
   const [winner, setWinner] = useState("");
-  const [round, setRound] = useState(1); // Contador de rodadas
-  const [gameOver, setGameOver] = useState(false); // Para verificar se o jogo acabou
-  const [isPlayer1Turn, setIsPlayer1Turn] = useState(true); // Para saber de quem é a vez
+  const [round, setRound] = useState(1); 
+  const [gameOver, setGameOver] = useState(false); 
+  const [isPlayer1Turn, setIsPlayer1Turn] = useState(true); 
 
   function rollDice(player) {
-    if (gameOver) return; // Não rolar os dados se o jogo tiver acabado
+    if (gameOver) return; 
 
     const roll = Math.floor(Math.random() * 6) + 1;
     if (player === 1) {
       setPlayer1(roll);
-      setIsPlayer1Turn(false); // Passar a vez para o Jogador 2
+      setIsPlayer1Turn(false); 
     } else {
       setPlayer2(roll);
-      setIsPlayer1Turn(true); // Passar a vez para o Jogador 1
+      setIsPlayer1Turn(true); 
     }
   }
 
-  // Função que calcula o vencedor e a próxima rodada
+  
   function endRound() {
     if (player1 && player2) {
       if (player1 > player2) {
@@ -33,16 +33,16 @@ export default function Home() {
       }
     }
 
-    // Incrementar a contagem de rodadas, mas garantir que não ultrapasse 5
+    
     if (round < 5) {
       setRound(round + 1);
     } else {
-      setGameOver(true); // Fim do jogo após 5 rodadas
+      setGameOver(true); 
     }
   }
 
   function restartGame() {
-    // Reiniciar todas as variáveis
+    
     setPlayer1(null);
     setPlayer2(null);
     setWinner("");
@@ -61,7 +61,7 @@ export default function Home() {
           {player1 && <img src={`/Dado${player1}.png`} alt={`Dado Jogador 1: ${player1}`} style={{ width: "100px", height: "100px" }} />}
           <button
             onClick={() => rollDice(1)}
-            disabled={!isPlayer1Turn || gameOver} // Desabilitar o botão se não for a vez do jogador ou se o jogo acabou
+            disabled={!isPlayer1Turn || gameOver}
             style={{
               padding: "10px 20px",
               fontSize: "18px",
@@ -85,7 +85,7 @@ export default function Home() {
           {player2 && <img src={`/Dado${player2}.png`} alt={`Dado Jogador 2: ${player2}`} style={{ width: "100px", height: "100px" }} />}
           <button
             onClick={() => rollDice(2)}
-            disabled={isPlayer1Turn || gameOver} // Desabilitar o botão se não for a vez do jogador ou se o jogo acabou
+            disabled={isPlayer1Turn || gameOver} 
             style={{
               padding: "10px 20px",
               fontSize: "18px",
@@ -108,7 +108,7 @@ export default function Home() {
       <h2>{winner}</h2>
       <h3>Rodada: {round} / 5</h3>
 
-      {/* Mostrar botão de "Finalizar Rodada" apenas se não for o fim do jogo */}
+      
       {!gameOver && player1 && player2 && (
         <div>
           <button
